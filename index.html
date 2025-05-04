@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Smart City Digital Twin</title>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+</head>
+<body>
+  <h1>Air Quality</h1>
+  <p id="pm25"></p>
+  <p id="pm10"></p>
+  <script>
+    const firebaseConfig = {
+  apiKey: "AIzaSyAETsEiLKN_RAvICHRQNGON7lFrxtbbGIk",
+  authDomain: "smartcitytwin.firebaseapp.com",
+  databaseURL: "https://smartcitytwin-default-rtdb.firebaseio.com",
+  projectId: "smartcitytwin",
+  storageBucket: "smartcitytwin.firebasestorage.app",
+  messagingSenderId: "39600288853",
+  appId: "1:39600288853:web:7d54cd81715f27b0d310dc"
+};
+    firebase.initializeApp(firebaseConfig);
+    var db = firebase.database();
+    db.ref("airQuality").on("value", (snapshot) => {
+      const data = snapshot.val();
+      document.getElementById("pm25").innerText = "PM2.5: " + data.PM25;
+      document.getElementById("pm10").innerText = "PM10: " + data.PM10;
+    });
+  </script>
+</body>
+</html>
